@@ -4,22 +4,9 @@
     {
       "src": "server.js",
       "use": "@vercel/node"
-    },
-    {
-      "src": "vercel-middlewares/middleware.js",
-      "use": "@vercel/edge"
     }
   ],
   "routes": [
-    {
-      "src": "/api/coupon/(.*)",
-      "dest": "/server.js",
-      "middleware": 1
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/server.js"
-    },
     {
       "src": "/(.*)",
       "dest": "/server.js"

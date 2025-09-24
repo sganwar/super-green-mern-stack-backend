@@ -7,6 +7,7 @@ const connectDB = require('./config/database.config.js');
 const webhookRoutes = require('./routes/webhookRoutes');
 const couponRoutes = require('./routes/couponRoutes');
 const Sentry = require("@sentry/node");
+const couponRateLimit = require('./middlewares/rateLimit');
 
 // Initialize Sentry
 if (process.env.SENTRY_DSN) {
@@ -52,7 +53,7 @@ connectDB();
 // API Routes, Routes should be before Sentry error handler and after all setup middleware
 app.use('/api/webhook2', webhookRoutes);
 // app.use('/api/webhook', webhookRoutes);
-app.use('/api/coupon', couponRoutes);
+app.use('/api/coupon', couponRateLimit,couponRoutes);
 
 // Health Check Route
 app.get('/health', (req, res) => {
