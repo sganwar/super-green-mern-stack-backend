@@ -51,8 +51,8 @@ app.use(express.urlencoded({ extended: true }));
 connectDB();
 
 // API Routes, Routes should be before Sentry error handler and after all setup middleware
-app.use('/api/webhook2', webhookRoutes);
-// app.use('/api/webhook', webhookRoutes);
+
+app.use('/api/webhook', webhookRoutes);
 app.use('/api/coupon', couponRateLimit,couponRoutes);
 
 // Health Check Route

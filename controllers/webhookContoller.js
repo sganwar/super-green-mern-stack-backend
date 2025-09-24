@@ -2,6 +2,7 @@ const handlePaymentCaptured = require("../handlers/handlePaymentCaptured");
 const handlePaymentFailed = require("../handlers/handlePaymentFailed");
 const handleRefundCreated = require("../handlers/handleRefundCreated");
 const handlePaymentAuthorized = require("../handlers/handlePaymentAuthorized");
+const Sentry = require("@sentry/node");
 
 const handleWebhook = async (req, res) => {
   // Always respond with 200 to acknowledge receipt, even for ignored events, to avoid retries and send response quickly to avoid timeouts
@@ -24,6 +25,8 @@ const handleWebhook = async (req, res) => {
     }
   } catch (error) {
     console.error("❌ Internal server error in webhook controller", error);
+    // mannually send error to sentry
+    Sentry.captureException(error); 
   }
 };
 
