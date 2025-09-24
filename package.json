@@ -1,0 +1,26 @@
+{
+  "name": "super-green-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@sentry/node": "^7.120.4",
+    "@upstash/ratelimit": "^2.0.6",
+    "@upstash/redis": "^1.35.4",
+    "axios": "^1.12.2",
+    "cors": "^2.8.5",
+    "csv-parser": "^3.2.0",
+    "dotenv": "^17.2.2",
+    "env-cmd": "^11.0.0",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "mongoose": "^8.18.1",
+    "razorpay": "^2.9.6"
+  }
+}
