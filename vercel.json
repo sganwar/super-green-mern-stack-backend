@@ -6,18 +6,23 @@
       "use": "@vercel/node"
     },
     {
-      "src": "vercel-middleware.js",
+      "src": "vercel-middlewares/middleware.js",
       "use": "@vercel/edge"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "server.js"
+      "src": "/api/coupon/(.*)",
+      "dest": "/server.js",
+      "middleware": 1
     },
     {
       "src": "/api/(.*)",
-      "dest": "server.js"
+      "dest": "/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/server.js"
     }
   ]
 }
