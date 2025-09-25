@@ -1,7 +1,7 @@
 # mannual entries
 /scripts/coupons.json
 /scripts/seedCoupons.js
-
+/scripts/seedDummyCoupons.js
 
 # Logs
 logs
