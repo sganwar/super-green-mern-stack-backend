@@ -112,10 +112,22 @@ let payment;
       }
     );
 
+    // if no coupons left
     if (!reserved) {
-      throw new Error(
-        `Fill the Coupons. No available coupons while assigning to payment ${paymentId}`
+      //1) send to sentry
+       Sentry.captureMessage(
+        `CRITICAL: No available coupons while assigning to payment ${paymentId}. Must refill coupons.`
       );
+      // 2) Abort transaction and end session before sending response to enable rollback of unsuccessful operation
+      await session.abortTransaction();
+      session.endSession();
+      session = null;
+      // 3) send no coupn left error
+      return res.status(503).json({ // 503 Service Unavailable
+        success: false,
+        message:
+          "Unlucky! We are temporarily out of coupon codes. Your payment was successful, please contact support with your payment ID to receive your coupon.",
+      });
     }
 
     await session.commitTransaction();
