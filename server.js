@@ -15,6 +15,11 @@ if (process.env.SENTRY_DSN) {
 }
 
 const app = express();
+// add this after express initialization, 
+// Instructs Express to trust the X-Forwarded-For header, which allows 
+// it to correctly read the end-user's actual IP address when running 
+// behind a proxy or load balancer (like Nginx, AWS, or Vercel).
+app.set('trust proxy', 1); 
 
 // Sentry middleware - must be the first middleware
 if (process.env.SENTRY_DSN) {
